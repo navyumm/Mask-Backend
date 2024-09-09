@@ -8,9 +8,14 @@ const commentRouter = require('../src/api/routes/comment.route')
 const authRouter = require('./auth/authentication')
 const { type } = require('os')
 const server = require('http').createServer(app)
+
+// Setting up CORS middleware
+const corsOrigin = process.env.CORS_ORIGIN || process.env.VITE_URL || "*";
+console.log("connected cors: ", corsOrigin);
+
 const io = require('socket.io')(server, {
   cors: {
-    origin: '*',
+    origin: corsOrigin,
     methods: ['GET', 'POST'],
     credentials: true,
   },
